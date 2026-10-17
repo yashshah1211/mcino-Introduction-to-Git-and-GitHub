@@ -1,0 +1,18 @@
+# Task 7: Terminal output of the first branch merge
+# Git command output from a local replay of the one-file README.md fix in the fork.
+# GitHub pull request #1 independently merged that same one-file change into main.
+
+$ git checkout main
+Switched to branch 'main'
+
+$ git merge bug-fix-typo
+Updating af23c8a..f8cc575
+Fast-forward
+ README.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+$ git show --format= --stat HEAD
+ README.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+# GitHub merge: https://github.com/yashshah1211/mcino-Introduction-to-Git-and-GitHub/pull/1
