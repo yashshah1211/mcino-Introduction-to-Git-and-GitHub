@@ -1,0 +1,22 @@
+Task 6 - Verify GitHub Repository Fork
+
+PowerShell curl command (executed by repository owner):
+
+PS C:\Windows\system32> curl.exe -sS "https://api.github.com/repos/yashshah1211/mcino-Introduction-to-Git-and-GitHub" | ConvertFrom-Json | Select-Object full_name, fork, @{Name="parent";Expression={$_.parent.full_name}}
+
+Terminal output (copied from the user's PowerShell session; parent name is truncated by the terminal's table display):
+
+full_name                                         fork parent
+---------                                         ---- ------
+yashshah1211/mcino-Introduction-to-Git-and-GitHub True ibm-developer-skills-network/mcino-Introduction-to-Git-and-Gi...
+
+PS C:\Windows\system32>
+
+Complete GitHub API verification (confirmed separately):
+
+full_name : yashshah1211/mcino-Introduction-to-Git-and-GitHub
+fork      : true
+parent    : ibm-developer-skills-network/mcino-Introduction-to-Git-and-GitHub
+visibility: public
+
+Source: https://api.github.com/repos/yashshah1211/mcino-Introduction-to-Git-and-GitHub
