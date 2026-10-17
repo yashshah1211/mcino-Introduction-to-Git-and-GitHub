@@ -1,0 +1,36 @@
+Task 9 - github-branches
+Repository: https://github.com/yashshah1211/mcino-Introduction-to-Git-and-GitHub
+
+Reproducible Windows PowerShell command (queries live GitHub API):
+
+$repo = "yashshah1211/mcino-Introduction-to-Git-and-GitHub"
+$branches = curl.exe -sS "https://api.github.com/repos/$repo/branches?per_page=100" | ConvertFrom-Json
+$branches | Sort-Object name | ForEach-Object {
+    $branch = $_.name
+    $status = if ($branch -eq "main") {
+        "default"
+    } else {
+        $comparison = curl.exe -sS "https://api.github.com/repos/$repo/compare/main...$branch" | ConvertFrom-Json
+        if ($comparison.ahead_by -eq 0) { "merged into main" } else { "not fully merged" }
+    }
+    [PSCustomObject]@{ Branch = $branch; Status = $status }
+} | Format-Table -AutoSize
+
+Terminal-style output (formatted using GitHub API data verified on 2026-10-17; not captured from the user's own PowerShell window):
+
+Branch        Status
+------        ------
+bug-fix-typo merged into main
+main          default
+
+Verification details:
+Source branch: bug-fix-typo
+Compare main...bug-fix-typo: behind (ahead_by=0, behind_by=3)
+Pull request #1: closed, merged=true
+Default branch: main
+Repository visibility: public
+
+API endpoints:
+https://api.github.com/repos/yashshah1211/mcino-Introduction-to-Git-and-GitHub/branches?per_page=100
+https://api.github.com/repos/yashshah1211/mcino-Introduction-to-Git-and-GitHub/compare/main...bug-fix-typo
+https://api.github.com/repos/yashshah1211/mcino-Introduction-to-Git-and-GitHub/pulls/1
