@@ -1,0 +1,22 @@
+Task 8: Pull Request Verification - bug-fix-revert
+
+PowerShell curl command (run to reproduce the output):
+PS> curl.exe -sS "https://api.github.com/repos/yashshah1211/mcino-Introduction-to-Git-and-GitHub/pulls/1" | ConvertFrom-Json | Select-Object number, state, merged, @{Name="forked_repository";Expression={$_.head.repo.full_name}}, @{Name="source_is_fork";Expression={$_.head.repo.fork}}, @{Name="source_branch";Expression={$_.head.ref}}, @{Name="target_repository";Expression={$_.base.repo.full_name}}, @{Name="target_branch";Expression={$_.base.ref}} | Format-List
+
+GitHub API-verified output (formatted for PowerShell; values retrieved from the live GitHub API, not copied from a local PowerShell terminal):
+number            : 1
+state             : closed
+merged            : True
+forked_repository : yashshah1211/mcino-Introduction-to-Git-and-GitHub
+source_is_fork    : True
+source_branch     : bug-fix-typo
+target_repository : yashshah1211/mcino-Introduction-to-Git-and-GitHub
+target_branch     : main
+
+Fork verification:
+Repository: yashshah1211/mcino-Introduction-to-Git-and-GitHub
+Is a fork: true
+Original upstream: ibm-developer-skills-network/mcino-Introduction-to-Git-and-GitHub
+Pull request URL: https://github.com/yashshah1211/mcino-Introduction-to-Git-and-GitHub/pull/1
+
+Note: The verified pull request targets the main branch within this same fork, not the upstream IBM repository.
